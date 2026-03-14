@@ -6,3 +6,4 @@ allure-results/
 *.pyc
 .venv/
 venv/
+.claude/

@@ -2,7 +2,7 @@
 
 ![CI](https://github.com/closethereport/qa-automation-suite/actions/workflows/tests.yml/badge.svg)
 
-Проект по автоматизации тестирования: UI, API и нагрузочные тесты.
+Фреймворк для автоматизации тестирования: UI, API и нагрузочные тесты.
 
 ## Стек
 
@@ -14,6 +14,16 @@
 | Отчёты | pytest-html |
 | CI/CD | GitHub Actions |
 
+## Возможности
+
+- **Page Object Model** — UI тесты с разделением логики и локаторов
+- **API клиент с логированием** — все запросы и ответы пишутся в лог
+- **Маркеры** `smoke` / `regression` — запускай только нужный набор тестов
+- **Мультиокружение** — запуск на dev, staging или prod через `--env`
+- **Retry** — автоматический перезапуск нестабильных тестов
+- **Скриншоты при падении** — Playwright сохраняет скриншот при каждом упавшем UI тесте
+- **Тесты времени ответа** — проверка что API отвечает в пределах допустимого
+
 ## Структура проекта
 
 ```
@@ -22,6 +32,7 @@ qa-automation-suite/
 │   ├── pages/
 │   └── tests/
 ├── api_tests/
+│   ├── client.py
 │   └── tests/
 ├── load_tests/
 │   └── locustfile.py
@@ -29,11 +40,6 @@ qa-automation-suite/
 ├── conftest.py
 └── requirements.txt
 ```
-
-## Приложения под тестами
-
-- **UI:** [SauceDemo](https://www.saucedemo.com) — демо-магазин
-- **API:** [JSONPlaceholder](https://jsonplaceholder.typicode.com) — демо REST API
 
 ## Установка и запуск
 
@@ -50,14 +56,21 @@ cp .env.example .env
 ### Запуск тестов
 
 ```bash
-# API тесты
+# Все тесты
+pytest
+
+# Только smoke
+pytest -m smoke
+
+# Только regression
+pytest -m regression
+
+# На конкретном окружении
+pytest --env=staging
+
+# Только API или UI
 pytest api_tests/ -v
-
-# UI тесты
 pytest ui_tests/ -v
-
-# С HTML-отчётом
-pytest api_tests/ -v --html=reports/report.html --self-contained-html
 ```
 
 ### Нагрузочные тесты

@@ -1,0 +1,9 @@
+pytest==8.3.5
+pytest-playwright==0.6.2
+pytest-allure-adaptor==1.7.10
+allure-pytest==2.13.5
+requests==2.32.3
+jsonschema==4.23.0
+python-dotenv==1.0.1
+locust==2.32.6
+pytest-html==4.1.1

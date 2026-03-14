@@ -16,3 +16,13 @@ class CatalogPage:
 
     def go_to_cart(self):
         self.cart_link.click()
+
+    def sort_by(self, option: str):
+        self.page.locator(".product_sort_container").select_option(option)
+
+    def get_product_names(self):
+        return self.page.locator(".inventory_item_name").all_text_contents()
+
+    def get_product_prices(self):
+        texts = self.page.locator(".inventory_item_price").all_text_contents()
+        return [float(p.replace("$", "")) for p in texts]

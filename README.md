@@ -1,6 +1,8 @@
 # QA Automation Suite
 
-Комплексный проект по автоматизации тестирования, покрывающий UI, API и нагрузочное тестирование.
+![CI](https://github.com/closethereport/qa-automation-suite/actions/workflows/tests.yml/badge.svg)
+
+Проект по автоматизации тестирования: UI, API и нагрузочные тесты.
 
 ## Стек
 
@@ -22,7 +24,7 @@ qa-automation-suite/
 ├── api_tests/
 │   └── tests/          # API тест-кейсы
 ├── load_tests/
-│   └── locustfile.py   # Сценарии нагрузочного тестирования
+│   └── locustfile.py   # Нагрузочные сценарии
 ├── .github/workflows/  # CI/CD пайплайн
 ├── conftest.py         # Общие фикстуры
 └── requirements.txt    # Зависимости
@@ -31,49 +33,34 @@ qa-automation-suite/
 ## Приложения под тестами
 
 - **UI:** [SauceDemo](https://www.saucedemo.com) — демо-магазин
-- **API:** [ReqRes](https://reqres.in) — демо REST API
+- **API:** [JSONPlaceholder](https://jsonplaceholder.typicode.com) — демо REST API
 
 ## Установка и запуск
 
-### 1. Клонировать репозиторий
-
 ```bash
-git clone https://github.com/<your-username>/qa-automation-suite.git
+git clone https://github.com/closethereport/qa-automation-suite.git
 cd qa-automation-suite
-```
-
-### 2. Создать виртуальное окружение и установить зависимости
-
-```bash
 python -m venv venv
-source venv/bin/activate  # Windows: venv\Scripts\activate
+venv\Scripts\activate
 pip install -r requirements.txt
 playwright install chromium
-```
-
-### 3. Настроить переменные окружения
-
-```bash
 cp .env.example .env
 ```
 
-### 4. Запустить тесты
+### Запуск тестов
 
 ```bash
-# Все тесты
-pytest
-
-# Только API тесты
+# API тесты
 pytest api_tests/ -v
 
-# Только UI тесты
+# UI тесты
 pytest ui_tests/ -v
 
 # С HTML-отчётом
 pytest api_tests/ -v --html=reports/report.html --self-contained-html
 ```
 
-### 5. Запустить нагрузочные тесты
+### Нагрузочные тесты
 
 ```bash
 locust -f load_tests/locustfile.py
@@ -82,5 +69,5 @@ locust -f load_tests/locustfile.py
 
 ## CI/CD
 
-При каждом пуше в `main` автоматически запускаются API и UI тесты через GitHub Actions.
+При каждом пуше в `master` автоматически запускаются API и UI тесты.
 Отчёты доступны во вкладке **Actions → Artifacts**.

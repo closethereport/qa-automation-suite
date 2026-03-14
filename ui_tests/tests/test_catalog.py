@@ -13,20 +13,20 @@ def logged_in_catalog(page: Page, base_url, credentials):
     return CatalogPage(page)
 
 
+@pytest.mark.smoke
 def test_catalog_shows_products(logged_in_catalog):
-    """На странице каталога отображаются товары"""
     count = logged_in_catalog.get_product_count()
     assert count == 6
 
 
+@pytest.mark.smoke
 def test_add_product_to_cart(logged_in_catalog):
-    """Товар добавляется в корзину"""
     logged_in_catalog.add_first_product_to_cart()
     assert logged_in_catalog.get_cart_count() == "1"
 
 
+@pytest.mark.regression
 def test_go_to_cart_after_adding(logged_in_catalog):
-    """После добавления можно перейти в корзину"""
     logged_in_catalog.add_first_product_to_cart()
     logged_in_catalog.go_to_cart()
     cart = CartPage(logged_in_catalog.page)

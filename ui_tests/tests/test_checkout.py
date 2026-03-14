@@ -19,6 +19,7 @@ def checkout_page(page: Page, base_url, credentials):
     return CheckoutPage(page)
 
 
+@pytest.mark.smoke
 def test_checkout_complete(checkout_page):
     checkout_page.fill_info("John", "Doe", "12345")
     checkout_page.continue_to_overview()
@@ -26,6 +27,7 @@ def test_checkout_complete(checkout_page):
     assert checkout_page.get_complete_message() == "Thank you for your order!"
 
 
+@pytest.mark.regression
 def test_checkout_without_info_shows_error(checkout_page):
     checkout_page.continue_to_overview()
     error = checkout_page.page.locator("[data-test='error']")

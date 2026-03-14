@@ -19,15 +19,15 @@
 ```
 qa-automation-suite/
 ├── ui_tests/
-│   ├── pages/          # Page Object Model
-│   └── tests/          # UI тест-кейсы
+│   ├── pages/
+│   └── tests/
 ├── api_tests/
-│   └── tests/          # API тест-кейсы
+│   └── tests/
 ├── load_tests/
-│   └── locustfile.py   # Нагрузочные сценарии
-├── .github/workflows/  # CI/CD пайплайн
-├── conftest.py         # Общие фикстуры
-└── requirements.txt    # Зависимости
+│   └── locustfile.py
+├── .github/workflows/
+├── conftest.py
+└── requirements.txt
 ```
 
 ## Приложения под тестами
@@ -69,5 +69,4 @@ locust -f load_tests/locustfile.py
 
 ## CI/CD
 
-При каждом пуше в `master` автоматически запускаются API и UI тесты.
-Отчёты доступны во вкладке **Actions → Artifacts**.
+Пайплайн состоит из трёх уровней: сначала запускаются smoke тесты, и только после их успешного прохождения — полные API и UI тесты параллельно. Отчёты сохраняются как артефакты в каждом запуске.

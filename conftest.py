@@ -1,6 +1,9 @@
 import pytest
+import logging
 from dotenv import load_dotenv
 import os
+
+logging.basicConfig(level=logging.DEBUG, format="%(asctime)s [%(levelname)s] %(message)s")
 
 
 def pytest_addoption(parser):
@@ -28,6 +31,12 @@ def base_url():
 @pytest.fixture(scope="session")
 def api_base_url():
     return os.getenv("API_BASE_URL", "https://jsonplaceholder.typicode.com")
+
+
+@pytest.fixture(scope="session")
+def api_client(api_base_url):
+    from api_tests.client import ApiClient
+    return ApiClient(api_base_url)
 
 
 @pytest.fixture(scope="session")

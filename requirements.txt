@@ -5,3 +5,4 @@ jsonschema==4.23.0
 python-dotenv==1.0.1
 locust==2.32.6
 pytest-html==4.1.1
+pytest-rerunfailures==15.0

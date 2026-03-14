@@ -2,7 +2,15 @@ import pytest
 from dotenv import load_dotenv
 import os
 
-load_dotenv()
+
+def pytest_addoption(parser):
+    parser.addoption("--env", action="store", default="dev", help="Environment: dev, staging, prod")
+
+
+def pytest_configure(config):
+    env = config.getoption("--env", default="dev")
+    env_file = f".env.{env}" if env != "dev" else ".env"
+    load_dotenv(env_file, override=True)
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

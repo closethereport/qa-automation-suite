@@ -1,4 +1,6 @@
 .env
+.env.staging
+.env.prod
 __pycache__/
 .pytest_cache/
 reports/

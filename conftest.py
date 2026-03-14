@@ -12,7 +12,7 @@ def base_url():
 
 @pytest.fixture(scope="session")
 def api_base_url():
-    return os.getenv("API_BASE_URL", "https://reqres.in/api")
+    return os.getenv("API_BASE_URL", "https://jsonplaceholder.typicode.com")
 
 
 @pytest.fixture(scope="session")
